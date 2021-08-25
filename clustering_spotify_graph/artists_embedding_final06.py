@@ -220,22 +220,22 @@ class Embedding_Analysis():
         temp_df["node_color"] = temp_df["node_color"].map(lambda x:str(x))
         temp_df.columns = map(str.upper, temp_df.columns)
 
-        u = 'amir.behrouzi-far@wmg.com'
-        p = 'Brown0123456*'
-        server = 'wmg-datalab/DATA_SCIENCE_SANDBOX/AMIR_B'
-        authenticator = 'https://wmg.okta.com'
+        u = ''
+        p = ''
+        server = ''
+        authenticator = ''
 
-        engine = create_engine('snowflake://' + u + ':' + p + '@' + server + '?warehouse=DATA_SCIENCE_SANDBOX_WH_M&role=ENT_OKTA_SNOWFLAKE_DATALAB_DATA_SCIENCE', connect_args={'authenticator': authenticator})
-        temp_df.to_sql('spotify_artist_embedding', engine, index=False, if_exists='replace', schema="AMIR_B", method=functools.partial(pd_writer, quote_identifiers=False))
+        engine = create_engine('', connect_args={'authenticator': authenticator})
+        temp_df.to_sql('spotify_artist_embedding', engine, index=False, if_exists='replace', schema="", method=functools.partial(pd_writer, quote_identifiers=False))
         
 
     def from_snowflake(self):
-        u = 'amir.behrouzi-far@wmg.com'
-        p = 'Brown0123456*'
-        server = 'wmg-datalab/DATA_SCIENCE_SANDBOX/AMIR_B'
-        authenticator = 'https://wmg.okta.com'
-        engine = create_engine('snowflake://' + u + ':' + p + '@' + server + '?warehouse=DATA_SCIENCE_SANDBOX_WH_M&role=ENT_OKTA_SNOWFLAKE_DATALAB_DATA_SCIENCE', connect_args={'authenticator': authenticator})
-        query_str = "SELECT * FROM DATA_SCIENCE_SANDBOX.AMIR_B.WMG_ARTISTS_SPOTIFY"
+        u = ''
+        p = ''
+        server = ''
+        authenticator = ''
+        engine = create_engine('', connect_args={'authenticator': authenticator})
+        query_str = ""
         with engine.connect() as con:
             self.wmg_artists = func_timeout(100,pd.read_sql,args=(query_str,con))
 
